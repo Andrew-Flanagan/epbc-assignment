@@ -20,12 +20,16 @@ public class SearchPage {
 
     @FindBy(css="input[id='react-select-dropdown-select-5-placeholder']") WebElement areaOfStudyDropdown;
     private final By aOS = By.id("react-select-dropdown-select-5-placeholder");
-    private final By addToMyListButton = By.cssSelector("button[aria-label='Add to My List']");
+    // private final By addToMyListButton = By.cssSelector("button[aria-label='Add to My List']");
+    private final By addToMyListLocator = By.cssSelector("button[aria-label='Add to My List']");
+
     // @FindBy(id="dropdown-option-search-filter-studyArea-Technology-(IT)") WebElement filterOption;
     // @FindBy(css="div[class='dropdown-select__option']") WebElement filterOption;
     // private final By filter = By.id("dropdown-option-search-filter-studyArea-Technology-(IT)");
     private final By filter = By.xpath("//*[@id=\"dropdown-option-search-filter-studyArea-Technology-(IT)\"]/li/label");
     @FindBy(css="button[aria-label='Search']") WebElement searchButton;
+    @FindBy(css="[id^='result-name-']") WebElement programName;
+    private final By searchResult = By.cssSelector("[class^='Search_result-row']");
 
 
     // aria-expanded="true"
@@ -43,31 +47,52 @@ public class SearchPage {
         driver.get(TestConfig.BASE_URL + "search/");
     }
 
-    public void clickAreaOfStudy() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(aOS));
+    public void filterByAreaOfStudy() {
+         wait.until(ExpectedConditions.presenceOfElementLocated(aOS));
         driver.findElement(aOS).click();
         // if(areaOfStudyDropdown.getAttribute("aria-expanded").equals("false")) {
         //     areaOfStudyDropdown.click();
         // }
         WebElement dropdownOption = wait.until(ExpectedConditions.elementToBeClickable(filter));
 
-        new Actions(driver).scrollToElement(dropdownOption).perform();
+        new Actions(driver).moveToElement(dropdownOption).perform();
         dropdownOption.click();
 
-
         searchButton.click();
-        
+    }
+
+    public String addFirstResultToMyList() {
         wait.until(ExpectedConditions.elementToBeClickable(searchButton));
+
+        List<WebElement> searchRow = driver.findElements(searchResult);
+        if (!searchRow.isEmpty()) {
+            wait.until(ExpectedConditions.stalenessOf(searchRow.get(0)));
+        }
+
+        List<WebElement> newSearchRow = driver.findElements(searchResult);
+        WebElement firstResult = newSearchRow.get(0);
+        wait.until(ExpectedConditions.visibilityOf(firstResult));
+
+        WebElement addToMyListButton = firstResult.findElement(addToMyListLocator);
+        String programNameText = programName.getText();
+
+        new Actions(driver).scrollToElement(addToMyListButton).perform();
+
+        addToMyListButton.click();
+        return programNameText;
+
         
         // List<WebElement> addToMyListButtons = driver.findElements(addToMyListButton);
-        // wait.until(ExpectedConditions.stalenessOf(addToMyListButtons.get(0)));
+        // if (!addToMyListButtons.isEmpty()) {
+        //     wait.until(ExpectedConditions.stalenessOf(addToMyListButtons.get(0)));
+        // }
 
-        List<WebElement> newAddToMyListButtons = driver.findElements(addToMyListButton);
-        WebElement firstResult = newAddToMyListButtons.get(0);
-        wait.until(ExpectedConditions.elementToBeClickable(firstResult));
+        // List<WebElement> newAddToMyListButtons = driver.findElements(addToMyListButton);
+        // WebElement firstResult = newAddToMyListButtons.get(0);
+        // wait.until(ExpectedConditions.elementToBeClickable(firstResult));
 
-        new Actions(driver).scrollToElement(firstResult).perform();
-        newAddToMyListButtons.get(0).click();
+        // new Actions(driver).scrollToElement(firstResult).perform();
+        // firstResult.click();
     }
 
     public String getProgramName() {

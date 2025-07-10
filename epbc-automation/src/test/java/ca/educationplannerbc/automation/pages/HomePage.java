@@ -21,7 +21,7 @@ public class HomePage {
     @FindBy(css="a[href='#']") WebElement signInButton;     // don't love this selector
     @FindBy(css="input[name='search']") WebElement searchBar;
     // @FindBy(css="input[name='search']") WebElement searchBar;
-    @FindBy(css="a[href='my-list']") WebElement myListButton;
+    @FindBy(css="a[href='/my-list']") WebElement myListButton;
 
 
     public HomePage(WebDriver driver) {

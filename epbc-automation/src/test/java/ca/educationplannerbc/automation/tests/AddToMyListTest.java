@@ -41,9 +41,15 @@ public class AddToMyListTest {
 
         searchPage = new SearchPage(driver);
 
-        searchPage.clickAreaOfStudy();
+        searchPage.filterByAreaOfStudy();
+        String programName = searchPage.addFirstResultToMyList();
+        System.out.println(programName);
 
-        
+        homePage.clickMyListButton();
+
+        myListPage = new MyListPage(driver);
+
+        myListPage.clickExplorePrograms();
     }
 
 }
