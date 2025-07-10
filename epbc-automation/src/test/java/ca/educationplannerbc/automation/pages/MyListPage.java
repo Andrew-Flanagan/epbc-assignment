@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ca.educationplannerbc.automation.config.TestConfig;
 
 public class MyListPage extends BasePage {
-
     private final By programNameLoc = By.cssSelector("p[class^='MyList_program-name']");
     private final By programNames = By.cssSelector("p[class^='MyList_program-name']");
     private final By exploreProgramsButtonLoc = By.cssSelector("a[href='/my-list/views?tab=0']");

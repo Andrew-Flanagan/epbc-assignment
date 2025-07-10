@@ -10,6 +10,8 @@ public class SignInPage extends BasePage {
     private final By emailInputLoc = By.id("signin-username");
     private final By passwordInputLoc = By.id("signin-password");
     private final By signInButtonLoc = By.id("sign-in-button");
+    private final By loginHeadingLoc = By.cssSelector("h2.login-heading");
+
 
     public SignInPage(WebDriver driver) {
         super(driver);
@@ -17,6 +19,10 @@ public class SignInPage extends BasePage {
 
     public void open() {
         driver.get(TestConfig.BASE_URL + "signin");
+    }
+
+    public WebElement getLoginHeader() {
+        return waitAndGet(loginHeadingLoc);
     }
 
     public By getEmailLocator() {

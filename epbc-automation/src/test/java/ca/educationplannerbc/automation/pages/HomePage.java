@@ -12,7 +12,6 @@ public class HomePage extends BasePage{
     private final By searchBarLoc = By.cssSelector("input[name='search']");
     private final By myListButtonLoc = By.cssSelector("a[href='/my-list']");
 
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -27,6 +26,10 @@ public class HomePage extends BasePage{
 
     public void clickSignIn() {
         waitAndClick(signInButtonLoc);
+    }
+
+    public WebElement getSearchBar() {
+        return waitAndGet(searchBarLoc);
     }
 
     public void searchAndSubmit(String searchTerm) {

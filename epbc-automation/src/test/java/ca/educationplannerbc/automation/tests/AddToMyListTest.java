@@ -29,6 +29,9 @@ public class AddToMyListTest {
         driver = new ChromeDriver();
         homePage = new HomePage(driver);
         homePage.open();
+        homePage.clickSignIn();
+        signInPage = new SignInPage(driver);
+        signInPage.signIn(TestConfig.TEST_USER_EMAIL, TestConfig.TEST_USER_PASSWORD);
     }
 
     @AfterEach
@@ -36,31 +39,33 @@ public class AddToMyListTest {
         driver.quit();
     }
 
+    // assertTrue(signInPage.getLoginHeader().isDisplayed());
+    // assertTrue(driver.getCurrentUrl().contains("signin"));
+
+    // assertTrue(homePage.getSearchBar().isDisplayed());
+    // assertTrue(driver.getCurrentUrl().equals(TestConfig.BASE_URL));
     @Test
     public void testAddToMyListFlow() {
-        homePage.clickSignIn();
-
-        signInPage = new SignInPage(driver);
-        signInPage.signIn(TestConfig.TEST_USER_EMAIL, TestConfig.TEST_USER_PASSWORD);
-
         homePage.searchAndSubmit("UBC");
-
         searchPage = new SearchPage(driver);
+        // Assert that there are search results
         searchPage.filterByAreaOfStudy();
+        // Assert that search results are filtered
         String searchProgramName = searchPage.addFirstResultToMyList();
+        // Assert that add to my list button text is updated
 
+        // Assert url here perhaps?
         homePage.clickMyListButton();
-
         myListPage = new MyListPage(driver);
         myListPage.clickExplorePrograms();
         String myListProgramName = myListPage.getProgramName();
 
         assertEquals(searchProgramName, myListProgramName, "Program name added from search results should equal program name in My List page");
+
         myListPage.clickToRemoveProgram();
-
         List<WebElement> newProgramNames = myListPage.getProgramNames();
-
         assertTrue(newProgramNames.isEmpty());
+        // Assert element no longer in DOM
 
         // TODO: fix list view
         // myListPage.clickListViewButton();
