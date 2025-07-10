@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +20,7 @@ public class SearchPage {
 
     @FindBy(css="input[id='react-select-dropdown-select-5-placeholder']") WebElement areaOfStudyDropdown;
     private final By aOS = By.id("react-select-dropdown-select-5-placeholder");
+    private final By addToMyListButton = By.cssSelector("button[aria-label='Add to My List']");
     // @FindBy(id="dropdown-option-search-filter-studyArea-Technology-(IT)") WebElement filterOption;
     // @FindBy(css="div[class='dropdown-select__option']") WebElement filterOption;
     // private final By filter = By.id("dropdown-option-search-filter-studyArea-Technology-(IT)");
@@ -47,13 +49,25 @@ public class SearchPage {
         // if(areaOfStudyDropdown.getAttribute("aria-expanded").equals("false")) {
         //     areaOfStudyDropdown.click();
         // }
-        wait.until(ExpectedConditions.elementToBeClickable(filter));
-        driver.findElement(filter).click();
-        // filterOption.click();
-        // searchButton.click();
+        WebElement dropdownOption = wait.until(ExpectedConditions.elementToBeClickable(filter));
+
+        new Actions(driver).scrollToElement(dropdownOption).perform();
+        dropdownOption.click();
+
+
+        searchButton.click();
         
-        // List<WebElement> addToMyListButtons = driver.findElements(By.cssSelector("button[aria-label='Add to My List']"));
-        // addToMyListButtons.get(0).click();
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton));
+        
+        // List<WebElement> addToMyListButtons = driver.findElements(addToMyListButton);
+        // wait.until(ExpectedConditions.stalenessOf(addToMyListButtons.get(0)));
+
+        List<WebElement> newAddToMyListButtons = driver.findElements(addToMyListButton);
+        WebElement firstResult = newAddToMyListButtons.get(0);
+        wait.until(ExpectedConditions.elementToBeClickable(firstResult));
+
+        new Actions(driver).scrollToElement(firstResult).perform();
+        newAddToMyListButtons.get(0).click();
     }
 
     public String getProgramName() {

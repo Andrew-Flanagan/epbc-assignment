@@ -32,16 +32,18 @@ public class AddToMyListTest {
 
     @Test
     public void testAddToMyListFlow() {
-        // homePage.clickSignIn();
+        homePage.clickSignIn();
 
-        // signInPage = new SignInPage(driver);
-        // signInPage.signIn("epbctest@test.com", "Password1!");
+        signInPage = new SignInPage(driver);
+        signInPage.signIn("epbctest@test.com", "Password1!");
 
         homePage.searchAndSubmit("UBC");
 
         searchPage = new SearchPage(driver);
 
         searchPage.clickAreaOfStudy();
+
+        
     }
 
 }
