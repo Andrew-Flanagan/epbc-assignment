@@ -1,9 +1,14 @@
 package ca.educationplannerbc.automation.tests;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import ca.educationplannerbc.automation.pages.HomePage;
@@ -42,14 +47,36 @@ public class AddToMyListTest {
         searchPage = new SearchPage(driver);
 
         searchPage.filterByAreaOfStudy();
-        String programName = searchPage.addFirstResultToMyList();
-        System.out.println(programName);
+        String searchProgramName = searchPage.addFirstResultToMyList();
 
         homePage.clickMyListButton();
 
         myListPage = new MyListPage(driver);
 
         myListPage.clickExplorePrograms();
+        String myListProgramName = myListPage.getProgramName();
+
+        List<WebElement> programNames = myListPage.getProgramNames();
+        System.out.println(programNames.size());
+
+        assertEquals(searchProgramName, myListProgramName, "Program name added from search results should equal program name in My List page");
+        myListPage.clickToRemoveProgram();
+
+        List<WebElement> newProgramNames = myListPage.getProgramNames();
+
+        assertTrue(newProgramNames.isEmpty());
+
+        // TODO: fix list view
+        // myListPage.clickListViewButton();
+        // List<WebElement> applyNowButtons = myListPage.getApplyNowButtons();
+        // System.out.println(applyNowButtons.size());
+        // myListPage.clickRemoveFromListButton();
+        // System.out.println(applyNowButtons.size());
+        // List<WebElement> applyNowButtonsNew = myListPage.getApplyNowButtons();
+        // System.out.println(applyNowButtonsNew.size());
+
+        
+
     }
 
 }
