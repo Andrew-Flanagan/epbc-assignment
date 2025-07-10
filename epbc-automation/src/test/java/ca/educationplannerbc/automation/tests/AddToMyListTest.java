@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import ca.educationplannerbc.automation.config.TestConfig;
 import ca.educationplannerbc.automation.pages.HomePage;
 import ca.educationplannerbc.automation.pages.MyListPage;
 import ca.educationplannerbc.automation.pages.SearchPage;
@@ -40,24 +41,19 @@ public class AddToMyListTest {
         homePage.clickSignIn();
 
         signInPage = new SignInPage(driver);
-        signInPage.signIn("epbctest@test.com", "Password1!");
+        signInPage.signIn(TestConfig.TEST_USER_EMAIL, TestConfig.TEST_USER_PASSWORD);
 
         homePage.searchAndSubmit("UBC");
 
         searchPage = new SearchPage(driver);
-
         searchPage.filterByAreaOfStudy();
         String searchProgramName = searchPage.addFirstResultToMyList();
 
         homePage.clickMyListButton();
 
         myListPage = new MyListPage(driver);
-
         myListPage.clickExplorePrograms();
         String myListProgramName = myListPage.getProgramName();
-
-        List<WebElement> programNames = myListPage.getProgramNames();
-        System.out.println(programNames.size());
 
         assertEquals(searchProgramName, myListProgramName, "Program name added from search results should equal program name in My List page");
         myListPage.clickToRemoveProgram();
