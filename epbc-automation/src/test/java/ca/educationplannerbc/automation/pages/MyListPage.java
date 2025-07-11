@@ -23,6 +23,10 @@ public class MyListPage extends BasePage {
     private final By comparisonBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='Comparison View']");
     private final By listBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='List View']");
 
+    // mobile locators
+    private final By mobileListViewBy = By.cssSelector("button[name='List View']");
+
+
     public MyListPage(WebDriver driver) {
         super(driver);
     }
@@ -87,5 +91,11 @@ public class MyListPage extends BasePage {
 
     public void clickExplorePrograms() {
         scrollToAndClick(exploreProgramsBtnBy);
+    }
+
+    // Mobile
+
+    public void mobileClickListView() {
+        scrollToAndClick(mobileListViewBy);
     }
 }

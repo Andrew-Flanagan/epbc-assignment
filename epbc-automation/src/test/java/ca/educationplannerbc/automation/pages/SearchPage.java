@@ -17,7 +17,13 @@ public class SearchPage extends BasePage {
     private final By tabProgramsBy = By.cssSelector("[id^='tab-Programs']");
     private final By searchResultBy = By.cssSelector("[class^='Search_result-row']");
     private final By programNameBy = By.cssSelector("[id^='result-name-']");
-    private final By addToListBy = By.cssSelector("button[aria-label$='My List']");
+    private final By addToListBy = By.cssSelector("div[class^='Search_result-row'] button[data-status]");
+
+    private final By mobileFiltersBtnby = By.cssSelector("button[aria-label='Filters']");
+    private final By mobileFiltersParentBy = By.cssSelector("div[class^='Search_filter-list']");
+    private final By mobileSearchBtnBy = By.id("SearchButton");
+
+
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -66,8 +72,6 @@ public class SearchPage extends BasePage {
         return waitAndGet(addToListBy);
     }
 
-
-    // don't really like how this is being done
     public List<String> addResultsToList(int numToAdd) {
         waitAndGet(searchResultBy);
 
@@ -85,5 +89,35 @@ public class SearchPage extends BasePage {
             wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(listBtnEl, addToListText)));
         }
         return programList;
+    }
+
+    public void clickMobileFilters() {
+        scrollToAndClick(mobileFiltersBtnby);
+    }
+
+    public void mobileFilterResults(String filterOption, String filterValue) {
+        String oldText = getTabProgramsText();
+
+        // sub filter from parent container to match the filter text, more resilient than using current id
+        WebElement filterContainerEl = waitAndGet(mobileFiltersParentBy);
+        WebElement filterOptionEl = 
+            getChildByXPath(
+                filterContainerEl,
+                ".//div[contains(text(), '" + filterOption + "')]",
+                "filter");
+        waitAndClick(filterOptionEl);
+
+        WebElement filterDropdownEl = waitAndGet(filterDropdownBy);
+        WebElement filterValueEl = 
+            getChildByXPath(
+                filterDropdownEl,
+                 ".//label[contains(text(), '" + filterValue + "')]",
+                  "dropdown value");
+        scrollToAndClick(filterValueEl);
+        scrollToAndClick(waitAndGet(filterContainerEl));
+
+        scrollToAndClick(mobileSearchBtnBy);
+        // waits until the program counter (num results) text has changed after filter is applied
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(tabProgramsBy, oldText)));
     }
 }

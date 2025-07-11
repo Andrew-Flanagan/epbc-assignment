@@ -7,18 +7,16 @@ import org.openqa.selenium.WebElement;
 
 import ca.educationplannerbc.automation.config.TestData;
 
-public class HomePage extends BasePage{
+public class MobileHomePage extends BasePage{
     private final By signInBtnBy = By.cssSelector("[class^='header'] a[href='#']");
     private final By searchInputBy = By.cssSelector("input[name='search']");
     private final By myListBtnBy = By.cssSelector("[class^='header'] a[href='/my-list']");
 
-    private final By mobileMenuBtnBy = By.cssSelector("a[aria-label='Open mobile menu']");
-    private final By mobileSignInBtnBy = By.cssSelector("nav[aria-label='Main menu'] a[href='#']");
-    private final By mobileMyListBtnBy = By.cssSelector("nav[aria-label='Main menu'] a[href='/my-list']");
+    private final By mobileMenuBtnBy = By.cssSelector("a[href='#']");
+    private final By mobileSignInBtnBy = By.cssSelector("nav[href='#']");
 
 
-
-    public HomePage(WebDriver driver) {
+    public MobileHomePage(WebDriver driver) {
         super(driver);
     }
 
@@ -31,7 +29,9 @@ public class HomePage extends BasePage{
     }
 
     public void clickSignIn() {
-        waitAndClick(signInBtnBy);
+        waitAndClick(mobileMenuBtnBy);
+        waitAndClick(mobileSignInBtnBy);
+
     }
 
     public WebElement getSearchBar() {
@@ -43,18 +43,5 @@ public class HomePage extends BasePage{
         searchInputEl.clear();
         searchInputEl.sendKeys(searchTerm);
         searchInputEl.sendKeys(Keys.RETURN);
-    }
-
-    public void mobileClickSignIn() {
-        waitAndClick(mobileMenuBtnBy);
-        waitAndClick(mobileSignInBtnBy);
-    }
-
-    public void mobileClickNav() {
-        scrollToAndClick(mobileMenuBtnBy);
-    }
-
-    public void mobileClickMyList() {
-        scrollToAndClick(mobileMyListBtnBy);
     }
 }

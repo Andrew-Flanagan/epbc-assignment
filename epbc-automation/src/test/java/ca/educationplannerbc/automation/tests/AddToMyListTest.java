@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -27,12 +28,10 @@ public class AddToMyListTest {
 
     @BeforeEach
     public void setup() {
-        driver = new ChromeDriver();
-        homePage = new HomePage(driver);
-        homePage.open();
-        homePage.clickSignIn();
-        signInPage = new SignInPage(driver);
-        signInPage.signIn(TestData.TEST_USER_EMAIL, TestData.TEST_USER_PASSWORD);
+        // driver = new ChromeDriver();
+        // homePage = new HomePage(driver);
+        // homePage.open();
+        
     }
 
     @AfterEach
@@ -40,8 +39,12 @@ public class AddToMyListTest {
         driver.quit();
     }
 
-    @Test
+    // @Test
     public void testAddToMyListFlow() {
+        homePage.clickSignIn();
+        signInPage = new SignInPage(driver);
+        signInPage.signIn(TestData.TEST_USER_EMAIL, TestData.TEST_USER_PASSWORD);
+
         // Search results are filtered
         homePage.searchAndSubmit(TestData.SEARCH_TERM);
         searchPage = new SearchPage(driver);
@@ -69,6 +72,53 @@ public class AddToMyListTest {
 
         // List view works, has correct number of programs
         myListPage.clickListView();
+        int numProgramsList = myListPage.getListNumPrograms();
+        assertEquals(numProgramsList, programsAdded.size());
+        
+        // No saved programs after removing all
+        myListPage.removeAllListPrograms();
+        assertEquals(myListPage.getListNumPrograms(), 0 );
+    }
+
+    @Test
+    public void mobileAddToMyListFlow() {
+        driver = new ChromeDriver();
+        driver.manage().window().setSize(new Dimension(390, 844));
+        homePage = new HomePage(driver);
+        homePage.open();
+        homePage.mobileClickSignIn();
+        signInPage = new SignInPage(driver);
+        signInPage.signIn(TestData.TEST_USER_EMAIL, TestData.TEST_USER_PASSWORD);
+
+        homePage.searchAndSubmit(TestData.SEARCH_TERM);
+        searchPage = new SearchPage(driver);
+        int resultsBefore = searchPage.getTotalResults();
+        searchPage.clickMobileFilters();
+        searchPage.mobileFilterResults(TestData.FILTER_OPTION, TestData.FILTER_VALUE);
+        int resultsAfter = searchPage.getTotalResults();
+        assertTrue(resultsAfter < resultsBefore);
+
+        // Add to My List button text is updated on click
+        String AddToListTextBefore = searchPage.getAddToListButton().getText();
+        List<String> programsAdded = searchPage.addResultsToList(TestData.NUM_PROGRAMS);
+
+        String AddToListTextAfter = searchPage.getAddToListButton().getText();
+        assertNotEquals(AddToListTextBefore, AddToListTextAfter);
+
+        // All program names displayed on comparision view
+        homePage.mobileClickNav();
+        homePage.mobileClickMyList();
+
+        myListPage = new MyListPage(driver);
+        myListPage.clickExplorePrograms();
+
+        List<String> allProgramNames = myListPage.getAllComparisonProgramNames();
+        Collections.sort(programsAdded);
+        Collections.sort(allProgramNames);
+        assertEquals(programsAdded, allProgramNames);
+
+        // List view works, has correct number of programs
+        myListPage.mobileClickListView();
         int numProgramsList = myListPage.getListNumPrograms();
         assertEquals(numProgramsList, programsAdded.size());
         
