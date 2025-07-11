@@ -11,12 +11,14 @@ import ca.educationplannerbc.automation.config.TestConfig;
 
 public class MyListPage extends BasePage {
     private final By programNameLoc = By.cssSelector("p[class^='MyList_program-name']");
-    private final By programNames = By.cssSelector("p[class^='MyList_program-name']");
     private final By exploreProgramsButtonLoc = By.cssSelector("a[href='/my-list/views?tab=0']");
-    private final By listViewButtonLoc = By.cssSelector("button[name='List View']");
     private final By removeFromListButtonLoc = By.cssSelector("button['Remove from My List']");
     private final By applyNow = By.cssSelector("a[role='button'][aria-label='Apply now']");
     private final By removeProgramButtonLoc = By.cssSelector("[aria-label='Click to remove']");
+    private final By listViewButtonLoc = By.cssSelector("[class^='MyList_side-panel'] button[name='List View']");
+    private final By ComparisonButtonLoc = By.cssSelector("[class^='MyList_side-panel'] button[name='Comparison View']");
+    private final By listViewRemoveButton = By.cssSelector("[aria-label='Remove from My List']");
+    private final By listViewApplyButton = By.cssSelector("a[role='button'][aria-label='Apply now']");
     // private final By comparisonViewButtonLoc = By.cssSelector("button[name='Comparison View']");
     // private final By applyNowButton = By.cssSelector("a[role='button'][aria-label='Apply now']");
 
@@ -38,27 +40,39 @@ public class MyListPage extends BasePage {
     }
 
     public void clickToRemoveProgram() {
-        int oldSize = getProgramNames().size();
+        int oldSize = getSavedPrograms().size();
         waitAndClick(removeProgramButtonLoc);
-        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(programNames, oldSize));
+        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(programNameLoc, oldSize));
     }
 
-    public List<WebElement> getProgramNames() {
-        return driver.findElements(programNames);
+    public List<WebElement> getSavedPrograms() {
+        return driver.findElements(programNameLoc);
     }
 
     public void clickListViewButton() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[p[text()='List View']]")));
-        // System.out.println(listViewButton.isEnabled());
-        // System.out.println(listViewButton.isDisplayed());
         scrollToAndClick(listViewButtonLoc);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(listViewRemoveButton));
+    }
+
+    public void clickListViewRemoveProgram() {
+        waitAndClick(listViewRemoveButton);
     }
 
     public void clickRemoveFromListButton() {
         waitAndClick(removeFromListButtonLoc);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(listViewApplyButton));
     }
 
     public List<WebElement> getApplyNowButtons() {
         return driver.findElements(applyNow);
+    }
+
+    public WebElement getListViewApplyButton() {
+        return waitAndGet(listViewApplyButton);
+    }
+
+    public void clickComparisonView() {
+        scrollToAndClick(ComparisonButtonLoc);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(programNameLoc));
     }
 }

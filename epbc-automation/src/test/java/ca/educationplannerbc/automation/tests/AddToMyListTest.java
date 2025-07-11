@@ -1,14 +1,12 @@
 package ca.educationplannerbc.automation.tests;
 
-import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import ca.educationplannerbc.automation.config.TestConfig;
@@ -39,36 +37,39 @@ public class AddToMyListTest {
         driver.quit();
     }
 
-    // assertTrue(signInPage.getLoginHeader().isDisplayed());
-    // assertTrue(driver.getCurrentUrl().contains("signin"));
-
-    // assertTrue(homePage.getSearchBar().isDisplayed());
-    // assertTrue(driver.getCurrentUrl().equals(TestConfig.BASE_URL));
     @Test
     public void testAddToMyListFlow() {
         homePage.searchAndSubmit("UBC");
         searchPage = new SearchPage(driver);
-        // Assert that there are search results
+        // Search results are filtered
+        int resultsBefore = searchPage.getTotalResults();
         searchPage.filterByAreaOfStudy();
-        // Assert that search results are filtered
-        String searchProgramName = searchPage.addFirstResultToMyList();
-        // Assert that add to my list button text is updated
+        int resultsAfter = searchPage.getTotalResults();
+        assertTrue(resultsAfter < resultsBefore);
 
-        // Assert url here perhaps?
+        // Add to My List button text is updated on click
+        String AddToListTextBefore = searchPage.getAddToListButton().getText();
+        String searchProgramName = searchPage.addFirstResultToMyList();
+        String AddToListTextAfter = searchPage.getAddToListButton().getText();
+        assertNotEquals(AddToListTextBefore, AddToListTextAfter);
+
+        // Program names are the same
         homePage.clickMyListButton();
         myListPage = new MyListPage(driver);
         myListPage.clickExplorePrograms();
         String myListProgramName = myListPage.getProgramName();
-
         assertEquals(searchProgramName, myListProgramName, "Program name added from search results should equal program name in My List page");
-
+        // myListPage.clickListViewButton();
+        // WebElement applyButton = myListPage.getListViewApplyButton();
+        // assertTrue(applyButton.isDisplayed());
+        
+        // No saved programs after removing
+        // myListPage.clickComparisonView();
         myListPage.clickToRemoveProgram();
-        List<WebElement> newProgramNames = myListPage.getProgramNames();
-        assertTrue(newProgramNames.isEmpty());
+        assertTrue(myListPage.getSavedPrograms().isEmpty());
         // Assert element no longer in DOM
 
         // TODO: fix list view
-        // myListPage.clickListViewButton();
         // List<WebElement> applyNowButtons = myListPage.getApplyNowButtons();
         // System.out.println(applyNowButtons.size());
         // myListPage.clickRemoveFromListButton();
