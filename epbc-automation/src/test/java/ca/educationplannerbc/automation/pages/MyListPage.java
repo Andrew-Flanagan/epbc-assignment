@@ -37,10 +37,13 @@ public class MyListPage extends BasePage {
         return programNameEl.getText();
     }
 
-    public void clickToRemoveProgram() {
-        int oldSize = getSavedPrograms().size();
-        waitAndClick(comparisonRemoveBtnBy);
-        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(programBy, oldSize));
+    public void removeAllPrograms() {
+        List<WebElement> programs = driver.findElements(programBy);
+        for (WebElement e : programs) {
+            int oldSize = getSavedPrograms().size();
+            waitAndClick(comparisonRemoveBtnBy);
+            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(programBy, oldSize));
+        }
     }
 
     public List<WebElement> getSavedPrograms() {

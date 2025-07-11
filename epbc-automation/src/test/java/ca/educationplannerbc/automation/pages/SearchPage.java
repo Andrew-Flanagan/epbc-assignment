@@ -1,5 +1,6 @@
 package ca.educationplannerbc.automation.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -60,7 +61,6 @@ public class SearchPage extends BasePage {
         return waitAndGet(addToListBy);
     }
 
-    // don't really like how this is being done
     public String addFirstResultToMyList() {
         waitAndGet(searchResultBy);
 
@@ -72,6 +72,25 @@ public class SearchPage extends BasePage {
         scrollToAndClick(addToListBy);
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(addToListBy, addToListText)));
         return programNameText;
+    }
+
+
+    // don't really like how this is being done
+    public List<WebElement> addResultsToList(int numToAdd) {
+        waitAndGet(searchResultBy);
+
+        List<WebElement> programList = new ArrayList<>();
+        List<WebElement> newSearchRow = driver.findElements(searchResultBy);
+
+        for (int i = 0; i < Math.min(numToAdd, newSearchRow.size()); i++) {
+            WebElement result = wait.until(ExpectedConditions.visibilityOf(newSearchRow.get(i)));
+            programList.add(result);
+            scrollToAndClick(result.findElement(addToListBy));
+            
+            String addToListText = result.findElement(addToListBy).getText();
+            wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(addToListBy, addToListText)));
+        }
+        return programList;
     }
 
     public String getProgramName() {

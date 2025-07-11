@@ -53,6 +53,12 @@ public class AddToMyListTest {
         String AddToListTextAfter = searchPage.getAddToListButton().getText();
         assertNotEquals(AddToListTextBefore, AddToListTextAfter);
 
+        // List<WebElement> programsAdded = searchPage.addResultsToList(4);
+        // for (WebElement e : programsAdded) {
+        //     System.out.println(e.getText());
+        // }
+
+
         // Program names are the same
         homePage.clickMyListButton();
         myListPage = new MyListPage(driver);
@@ -65,20 +71,8 @@ public class AddToMyListTest {
         
         // No saved programs after removing
         // myListPage.clickComparisonView();
-        myListPage.clickToRemoveProgram();
+        myListPage.removeAllPrograms();
         assertTrue(myListPage.getSavedPrograms().isEmpty());
         // Assert element no longer in DOM
-
-        // TODO: fix list view
-        // List<WebElement> applyNowButtons = myListPage.getApplyNowButtons();
-        // System.out.println(applyNowButtons.size());
-        // myListPage.clickRemoveFromListButton();
-        // System.out.println(applyNowButtons.size());
-        // List<WebElement> applyNowButtonsNew = myListPage.getApplyNowButtons();
-        // System.out.println(applyNowButtonsNew.size());
-
-        
-
     }
-
 }
