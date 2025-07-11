@@ -51,7 +51,6 @@ public class SearchPage extends BasePage {
                   "dropdown value");
         scrollToAndClick(filterValueEl);
 
-        // due to current bug(?), have to press search button after applying filter
         waitAndClick(searchBtnBy);
         // waits until the program counter (num results) text has changed after filter is applied
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(tabProgramsBy, oldText)));
@@ -65,19 +64,6 @@ public class SearchPage extends BasePage {
 
     public WebElement getAddToListButton() {
         return waitAndGet(addToListBy);
-    }
-
-    public String addFirstResultToMyList() {
-        waitAndGet(searchResultBy);
-
-        List<WebElement> newSearchRow = driver.findElements(searchResultBy);
-        WebElement firstResult = wait.until(ExpectedConditions.visibilityOf(newSearchRow.get(0)));
-        String programNameText = firstResult.findElement(programNameBy).getText();
-
-        String addToListText = firstResult.findElement(addToListBy).getText();
-        scrollToAndClick(addToListBy);
-        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(addToListBy, addToListText)));
-        return programNameText;
     }
 
 
@@ -99,12 +85,5 @@ public class SearchPage extends BasePage {
             wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(listBtnEl, addToListText)));
         }
         return programList;
-    }
-
-    public String getProgramName() {
-        List<WebElement> programResults = driver.findElements(searchResultBy);
-        WebElement firstResult = programResults.get(0);
-        WebElement program = firstResult.findElement(programNameBy);
-        return program.getText();
     }
 }

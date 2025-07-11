@@ -19,10 +19,6 @@ public class SignInPage extends BasePage {
         driver.get(TestData.BASE_URL + "signin");
     }
 
-    public By getEmailLocator() {
-        return emailBy;
-    }
-
     public void signIn(String email, String password) {
         WebElement emailEl = waitAndGet(emailBy);
         emailEl.clear();

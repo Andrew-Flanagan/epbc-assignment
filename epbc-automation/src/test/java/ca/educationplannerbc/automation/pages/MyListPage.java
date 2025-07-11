@@ -11,14 +11,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ca.educationplannerbc.automation.config.TestData;
 
 public class MyListPage extends BasePage {
+    // comparison view locators
     private final By programBy = By.cssSelector("p[class^='MyList_program-name']");
     private final By exploreProgramsBtnBy = By.cssSelector("a[href='/my-list/views?tab=0']");
     private final By comparisonBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='Comparison View']");
     private final By comparisonRemoveBtnBy = By.cssSelector("[aria-label='Click to remove']");
 
+    // list view locators
     private final By listBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='List View']");
     private final By listRemoveBtnBy = By.cssSelector("[aria-label='Remove from My List']");
     
+    // shared locators
     private final By applyNowBtnBy = By.cssSelector("a[role='button'][aria-label='Apply now']");
 
     public MyListPage(WebDriver driver) {
@@ -34,8 +37,7 @@ public class MyListPage extends BasePage {
     }
 
     public String getProgramName() {
-        WebElement programNameEl = waitAndGet(programBy);
-        return programNameEl.getText();
+        return waitAndGet(programBy).getText();
     }
 
     public List<String> getAllProgramNames() {
@@ -78,6 +80,7 @@ public class MyListPage extends BasePage {
     }
 
     public List<WebElement> getApplyNowButtons() {
+        waitAndGet(applyNowBtnBy);
         return driver.findElements(applyNowBtnBy);
     }
 
@@ -87,6 +90,7 @@ public class MyListPage extends BasePage {
 
     }
     public void clickComparisonView() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(programBy));
+        waitAndGet(programBy);
+        waitAndClick(comparisonBtnBy);
     }
 }

@@ -66,7 +66,7 @@ public class AddToMyListTest {
         List<String> allProgramNames = myListPage.getAllProgramNames();
         Collections.sort(programsAdded);
         Collections.sort(allProgramNames);
-        assertEquals(programsAdded, allProgramNames, "Program names added from search should be the same as in my list");
+        assertEquals(programsAdded, allProgramNames);
 
         // myListPage.clickListViewButton();
         // WebElement applyButton = myListPage.getListViewApplyButton();
