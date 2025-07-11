@@ -5,7 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import ca.educationplannerbc.automation.config.TestConfig;
+import ca.educationplannerbc.automation.config.TestData;
 
 public class HomePage extends BasePage{
     private final By signInBtnBy = By.cssSelector("[class^='header'] a[href='#']");
@@ -17,7 +17,7 @@ public class HomePage extends BasePage{
     }
 
     public void open() {
-        driver.get(TestConfig.BASE_URL);
+        driver.get(TestData.BASE_URL);
     }
 
     public void clickMyListButton() {

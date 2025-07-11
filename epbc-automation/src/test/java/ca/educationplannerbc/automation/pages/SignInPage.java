@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import ca.educationplannerbc.automation.config.TestConfig;
+import ca.educationplannerbc.automation.config.TestData;
 
 public class SignInPage extends BasePage {
     private final By emailBy = By.id("signin-username");
@@ -16,7 +16,7 @@ public class SignInPage extends BasePage {
     }
 
     public void open() {
-        driver.get(TestConfig.BASE_URL + "signin");
+        driver.get(TestData.BASE_URL + "signin");
     }
 
     public By getEmailLocator() {

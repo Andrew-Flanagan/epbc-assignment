@@ -1,5 +1,6 @@
 package ca.educationplannerbc.automation.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -7,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import ca.educationplannerbc.automation.config.TestConfig;
+import ca.educationplannerbc.automation.config.TestData;
 
 public class MyListPage extends BasePage {
     private final By programBy = By.cssSelector("p[class^='MyList_program-name']");
@@ -25,7 +26,7 @@ public class MyListPage extends BasePage {
     }
 
     public void open() {
-        driver.get(TestConfig.BASE_URL + "my-list");
+        driver.get(TestData.BASE_URL + "my-list");
     }
 
     public void clickExplorePrograms() {
@@ -37,7 +38,19 @@ public class MyListPage extends BasePage {
         return programNameEl.getText();
     }
 
+    public List<String> getAllProgramNames() {
+        waitAndGet(programBy);
+        List<String> programNames = new ArrayList<>();
+        List <WebElement> programNamesEl = driver.findElements(programBy);
+        for (WebElement e : programNamesEl) {
+            programNames.add(e.getText());
+        }
+
+        return programNames;
+    }
+
     public void removeAllPrograms() {
+        waitAndGet(programBy);
         List<WebElement> programs = driver.findElements(programBy);
         for (WebElement e : programs) {
             int oldSize = getSavedPrograms().size();

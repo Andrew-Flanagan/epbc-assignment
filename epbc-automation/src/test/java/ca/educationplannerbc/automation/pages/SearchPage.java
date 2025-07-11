@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import ca.educationplannerbc.automation.config.TestConfig;
+import ca.educationplannerbc.automation.config.TestData;
 
 public class SearchPage extends BasePage {
     private final By searchBtnBy = By.cssSelector("button[aria-label='Search']");
@@ -24,7 +24,7 @@ public class SearchPage extends BasePage {
     }
 
     public void open() {
-        driver.get(TestConfig.BASE_URL + "search/");
+        driver.get(TestData.BASE_URL + "search/");
     }
 
     public String getTabProgramsText() {
@@ -35,14 +35,20 @@ public class SearchPage extends BasePage {
         String oldText = getTabProgramsText();
 
         // sub filter from parent container to match the filter text, more resilient than using current id
-        WebElement filterContainerEl = driver.findElement(filterContainerBy);
-        WebElement filterOptionEl = filterContainerEl
-            .findElement(By.xpath(".//div[contains(text(), '" + filterOption + "')]"));
+        WebElement filterContainerEl = waitAndGet(filterContainerBy);
+        WebElement filterOptionEl = 
+            getChildByXPath(
+                filterContainerEl,
+                ".//div[contains(text(), '" + filterOption + "')]",
+                "filter");
         waitAndClick(filterOptionEl);
 
-        WebElement filterDropdownEl = driver.findElement(filterDropdownBy);
-        WebElement filterValueEl = filterDropdownEl
-            .findElement(By.xpath(".//label[contains(text(), '" + filterValue + "')]"));
+        WebElement filterDropdownEl = waitAndGet(filterDropdownBy);
+        WebElement filterValueEl = 
+            getChildByXPath(
+                filterDropdownEl,
+                 ".//label[contains(text(), '" + filterValue + "')]",
+                  "dropdown value");
         scrollToAndClick(filterValueEl);
 
         // due to current bug(?), have to press search button after applying filter
@@ -76,19 +82,21 @@ public class SearchPage extends BasePage {
 
 
     // don't really like how this is being done
-    public List<WebElement> addResultsToList(int numToAdd) {
+    public List<String> addResultsToList(int numToAdd) {
         waitAndGet(searchResultBy);
 
-        List<WebElement> programList = new ArrayList<>();
+        List<String> programList = new ArrayList<>();
         List<WebElement> newSearchRow = driver.findElements(searchResultBy);
 
         for (int i = 0; i < Math.min(numToAdd, newSearchRow.size()); i++) {
-            WebElement result = wait.until(ExpectedConditions.visibilityOf(newSearchRow.get(i)));
-            programList.add(result);
+            WebElement result = waitAndGet(newSearchRow.get(i));
+            programList.add(waitAndGet(result.findElement(programNameBy)).getText());
+            String addToListText = waitAndGet((result.findElement(addToListBy))).getText();
+
             scrollToAndClick(result.findElement(addToListBy));
-            
-            String addToListText = result.findElement(addToListBy).getText();
-            wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(addToListBy, addToListText)));
+
+            WebElement listBtnEl = waitAndGet(result.findElement(addToListBy));            
+            wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(listBtnEl, addToListText)));
         }
         return programList;
     }

@@ -3,6 +3,7 @@ package ca.educationplannerbc.automation.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -45,5 +46,13 @@ public class BasePage {
         waitAndGet(element);
         new Actions(driver).moveToElement(element).perform();
         waitAndClick(element);
+    }
+
+    protected WebElement getChildByXPath(WebElement parent, String xPath, String context) {
+        try {
+            return waitAndGet(parent.findElement(By.xpath(xPath)));
+        } catch (NoSuchElementException nse) {
+            throw new NoSuchElementException("Cannot find " + context + " element by " + xPath + "\n" + nse.getMessage(), nse);
+        }
     }
 }

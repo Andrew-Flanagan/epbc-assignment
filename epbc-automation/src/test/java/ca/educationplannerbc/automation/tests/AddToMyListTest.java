@@ -1,5 +1,8 @@
 package ca.educationplannerbc.automation.tests;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -9,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import ca.educationplannerbc.automation.config.TestConfig;
+import ca.educationplannerbc.automation.config.TestData;
 import ca.educationplannerbc.automation.pages.HomePage;
 import ca.educationplannerbc.automation.pages.MyListPage;
 import ca.educationplannerbc.automation.pages.SearchPage;
@@ -29,7 +32,7 @@ public class AddToMyListTest {
         homePage.open();
         homePage.clickSignIn();
         signInPage = new SignInPage(driver);
-        signInPage.signIn(TestConfig.TEST_USER_EMAIL, TestConfig.TEST_USER_PASSWORD);
+        signInPage.signIn(TestData.TEST_USER_EMAIL, TestData.TEST_USER_PASSWORD);
     }
 
     @AfterEach
@@ -39,32 +42,32 @@ public class AddToMyListTest {
 
     @Test
     public void testAddToMyListFlow() {
-        homePage.searchAndSubmit("UBC");
+        homePage.searchAndSubmit(TestData.SEARCH_TERM);
         searchPage = new SearchPage(driver);
         // Search results are filtered
         int resultsBefore = searchPage.getTotalResults();
-        searchPage.filterResults("Areas of study", "Technology (IT)");
+        searchPage.filterResults(TestData.FILTER_OPTION, TestData.FILTER_VALUE);
         int resultsAfter = searchPage.getTotalResults();
         assertTrue(resultsAfter < resultsBefore);
 
+        
         // Add to My List button text is updated on click
         String AddToListTextBefore = searchPage.getAddToListButton().getText();
-        String searchProgramName = searchPage.addFirstResultToMyList();
+        List<String> programsAdded = searchPage.addResultsToList(TestData.NUM_PROGRAMS);
+
         String AddToListTextAfter = searchPage.getAddToListButton().getText();
         assertNotEquals(AddToListTextBefore, AddToListTextAfter);
-
-        // List<WebElement> programsAdded = searchPage.addResultsToList(4);
-        // for (WebElement e : programsAdded) {
-        //     System.out.println(e.getText());
-        // }
-
 
         // Program names are the same
         homePage.clickMyListButton();
         myListPage = new MyListPage(driver);
         myListPage.clickExplorePrograms();
-        String myListProgramName = myListPage.getProgramName();
-        assertEquals(searchProgramName, myListProgramName, "Program name added from search results should equal program name in My List page");
+
+        List<String> allProgramNames = myListPage.getAllProgramNames();
+        Collections.sort(programsAdded);
+        Collections.sort(allProgramNames);
+        assertEquals(programsAdded, allProgramNames, "Program names added from search should be the same as in my list");
+
         // myListPage.clickListViewButton();
         // WebElement applyButton = myListPage.getListViewApplyButton();
         // assertTrue(applyButton.isDisplayed());
@@ -73,6 +76,5 @@ public class AddToMyListTest {
         // myListPage.clickComparisonView();
         myListPage.removeAllPrograms();
         assertTrue(myListPage.getSavedPrograms().isEmpty());
-        // Assert element no longer in DOM
     }
 }
