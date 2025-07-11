@@ -60,6 +60,8 @@ All testing done on Brave browser.
         Resulting Behavior
             Search results are not refreshed to clear the filtered results, user has to click the search button to refresh the results.
 
+        UX note: Not sure if it's a bug, but applying filters does not automatically refresh the results either, user has to click search button to apply filters.
+
        
 3. Search pagination appears when only one page of results is available
 
