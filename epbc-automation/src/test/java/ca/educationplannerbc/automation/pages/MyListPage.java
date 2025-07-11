@@ -14,33 +14,21 @@ public class MyListPage extends BasePage {
     // comparison view locators
     private final By programBy = By.cssSelector("p[class^='MyList_program-name']");
     private final By exploreProgramsBtnBy = By.cssSelector("a[href='/my-list/views?tab=0']");
-    private final By comparisonBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='Comparison View']");
     private final By comparisonRemoveBtnBy = By.cssSelector("[aria-label='Click to remove']");
-
+    
     // list view locators
-    private final By listBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='List View']");
     private final By listRemoveBtnBy = By.cssSelector("[aria-label='Remove from My List']");
     
     // shared locators
-    private final By applyNowBtnBy = By.cssSelector("a[role='button'][aria-label='Apply now']");
+    private final By comparisonBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='Comparison View']");
+    private final By listBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='List View']");
 
     public MyListPage(WebDriver driver) {
         super(driver);
     }
 
-    public void open() {
-        driver.get(TestData.BASE_URL + "my-list");
-    }
-
-    public void clickExplorePrograms() {
-        scrollToAndClick(exploreProgramsBtnBy);
-    }
-
-    public String getProgramName() {
-        return waitAndGet(programBy).getText();
-    }
-
-    public List<String> getAllProgramNames() {
+    // Comparison view methods
+    public List<String> getAllComparisonProgramNames() {
         waitAndGet(programBy);
         List<String> programNames = new ArrayList<>();
         List <WebElement> programNamesEl = driver.findElements(programBy);
@@ -51,46 +39,53 @@ public class MyListPage extends BasePage {
         return programNames;
     }
 
-    public void removeAllPrograms() {
+    public void removeAllComparisonPrograms() {
         waitAndGet(programBy);
         List<WebElement> programs = driver.findElements(programBy);
         for (WebElement e : programs) {
-            int oldSize = getSavedPrograms().size();
+            int oldSize = getNumComparisonPrograms();
             waitAndClick(comparisonRemoveBtnBy);
             wait.until(ExpectedConditions.numberOfElementsToBeLessThan(programBy, oldSize));
         }
     }
 
-    public List<WebElement> getSavedPrograms() {
-        return driver.findElements(programBy);
+    public int getNumComparisonPrograms() {
+        return driver.findElements(programBy).size();
     }
 
-    public void clickListViewButton() {
+
+    // List view methods
+    public void removeAllListPrograms() {
+        waitAndGet(listRemoveBtnBy);
+        List<WebElement> programs = driver.findElements(listRemoveBtnBy);
+        for (WebElement e : programs) {
+            int oldSize = driver.findElements(listRemoveBtnBy).size();
+            scrollToAndClick(listRemoveBtnBy);
+            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(listRemoveBtnBy, oldSize));
+        }
+    }
+
+    public int getListNumPrograms() {
+        return driver.findElements(listRemoveBtnBy).size();
+    }
+
+
+    // Shared methods
+    public void open() {
+        driver.get(TestData.BASE_URL + "my-list");
+    }
+
+    public void clickComparisonView() {
+        waitAndGet(listRemoveBtnBy);
+        scrollToAndClick(comparisonBtnBy);
+    }
+
+    public void clickListView() {
         scrollToAndClick(listBtnBy);
         wait.until(ExpectedConditions.visibilityOfElementLocated(listRemoveBtnBy));
     }
 
-    public void clickListViewRemoveProgram() {
-        waitAndClick(listRemoveBtnBy);
-    }
-
-    public void clickRemoveFromListButton() {
-        waitAndClick(comparisonRemoveBtnBy);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(applyNowBtnBy));
-    }
-
-    public List<WebElement> getApplyNowButtons() {
-        waitAndGet(applyNowBtnBy);
-        return driver.findElements(applyNowBtnBy);
-    }
-
-    public WebElement getApplyButton() {
-        scrollToAndClick(comparisonBtnBy);
-        return waitAndGet(applyNowBtnBy);
-
-    }
-    public void clickComparisonView() {
-        waitAndGet(programBy);
-        waitAndClick(comparisonBtnBy);
+    public void clickExplorePrograms() {
+        scrollToAndClick(exploreProgramsBtnBy);
     }
 }

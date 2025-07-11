@@ -42,39 +42,38 @@ public class AddToMyListTest {
 
     @Test
     public void testAddToMyListFlow() {
+        // Search results are filtered
         homePage.searchAndSubmit(TestData.SEARCH_TERM);
         searchPage = new SearchPage(driver);
-        // Search results are filtered
         int resultsBefore = searchPage.getTotalResults();
         searchPage.filterResults(TestData.FILTER_OPTION, TestData.FILTER_VALUE);
         int resultsAfter = searchPage.getTotalResults();
         assertTrue(resultsAfter < resultsBefore);
 
-        
         // Add to My List button text is updated on click
         String AddToListTextBefore = searchPage.getAddToListButton().getText();
         List<String> programsAdded = searchPage.addResultsToList(TestData.NUM_PROGRAMS);
 
         String AddToListTextAfter = searchPage.getAddToListButton().getText();
         assertNotEquals(AddToListTextBefore, AddToListTextAfter);
-
-        // Program names are the same
+        
+        // All program names displayed on comparision view
         homePage.clickMyListButton();
         myListPage = new MyListPage(driver);
         myListPage.clickExplorePrograms();
 
-        List<String> allProgramNames = myListPage.getAllProgramNames();
+        List<String> allProgramNames = myListPage.getAllComparisonProgramNames();
         Collections.sort(programsAdded);
         Collections.sort(allProgramNames);
         assertEquals(programsAdded, allProgramNames);
 
-        // myListPage.clickListViewButton();
-        // WebElement applyButton = myListPage.getListViewApplyButton();
-        // assertTrue(applyButton.isDisplayed());
+        // List view works, has correct number of programs
+        myListPage.clickListView();
+        int numProgramsList = myListPage.getListNumPrograms();
+        assertEquals(numProgramsList, programsAdded.size());
         
-        // No saved programs after removing
-        // myListPage.clickComparisonView();
-        myListPage.removeAllPrograms();
-        assertTrue(myListPage.getSavedPrograms().isEmpty());
+        // No saved programs after removing all
+        myListPage.removeAllListPrograms();
+        assertEquals(myListPage.getListNumPrograms(), 0 );
     }
 }

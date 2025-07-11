@@ -7,6 +7,6 @@ public class TestData {
     public static final String SEARCH_TERM = "UBC";
     public static final String FILTER_OPTION = "Areas of study";
     public static final String FILTER_VALUE = "Technology (IT)";
-    public static final int    NUM_PROGRAMS = 1;
+    public static final int    NUM_PROGRAMS = 2;
 
 }
