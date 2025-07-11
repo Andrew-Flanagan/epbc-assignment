@@ -46,6 +46,8 @@ All testing done on Brave browser.
         Note: It seems there is a "right: 15%" offset applied to the images, removing this fixes the centering issue.
 ![alt text](images/Comparison.png)
 
+The following two are more so UX/observations than bugs.
+
 2. Clearing search filters does not automatically refresh results.
     
         When search filters are cleared using the 'Clear' button, the results are not automatically refreshed.
