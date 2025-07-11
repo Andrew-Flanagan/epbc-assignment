@@ -25,8 +25,6 @@ public class SearchPage extends BasePage {
 
     private final boolean isMobile;
 
-
-
     public SearchPage(WebDriver driver, boolean isMobile) {
         super(driver);
         this.isMobile = isMobile;
@@ -109,29 +107,5 @@ public class SearchPage extends BasePage {
     // mobile methods
     public void clickMobileFilters() {
         scrollToAndClick(mobileFiltersBtnby);
-    }
-
-    public void mobileFilterResults(String filterOption, String filterValue) {
-        String oldText = getTabProgramsText();
-
-        WebElement filterContainerEl = waitAndGet(mobileFiltersParentBy);
-        WebElement filterOptionEl = 
-            getChildByXPath(
-                filterContainerEl,
-                ".//div[contains(text(), '" + filterOption + "')]",
-                "filter");
-        waitAndClick(filterOptionEl);
-
-        WebElement filterDropdownEl = waitAndGet(filterDropdownBy);
-        WebElement filterValueEl = 
-            getChildByXPath(
-                filterDropdownEl,
-                 ".//label[contains(text(), '" + filterValue + "')]",
-                  "dropdown value");
-        scrollToAndClick(filterValueEl);
-        scrollToAndClick(waitAndGet(filterContainerEl));
-
-        scrollToAndClick(mobileSearchBtnBy);
-        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(tabProgramsBy, oldText)));
     }
 }

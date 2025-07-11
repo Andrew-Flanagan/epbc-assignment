@@ -39,8 +39,8 @@ public class AddToMyListTest {
 
     @ParameterizedTest
     @ValueSource(booleans = { true, false }) 
-    public void desktopAddToMyListFlow(boolean isMobile) {
-        if (isMobile) { driver.manage().window().setSize(new Dimension(390, 844)); }
+    public void testAddToMyListFlow(boolean isMobile) {
+        if (isMobile) { driver.manage().window().setSize(new Dimension(390, 844)); } // iPhone 12 pro dimensions
         homePage = new HomePage(driver, isMobile);
         homePage.open();
         homePage.clickSignIn();

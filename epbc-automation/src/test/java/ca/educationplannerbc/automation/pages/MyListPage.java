@@ -60,7 +60,6 @@ public class MyListPage extends BasePage {
         return driver.findElements(programBy).size();
     }
 
-
     // List view methods
     public void removeAllListPrograms() {
         waitAndGet(listRemoveBtnBy);
@@ -75,7 +74,6 @@ public class MyListPage extends BasePage {
     public int getListNumPrograms() {
         return driver.findElements(listRemoveBtnBy).size();
     }
-
 
     // Shared methods
     public void open() {
@@ -102,7 +100,6 @@ public class MyListPage extends BasePage {
     }
 
     // Mobile
-
     public void mobileClickListView() {
         scrollToAndClick(mobileListViewBy);
     }
