@@ -10,17 +10,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ca.educationplannerbc.automation.config.TestConfig;
 
 public class MyListPage extends BasePage {
-    private final By programNameLoc = By.cssSelector("p[class^='MyList_program-name']");
-    private final By exploreProgramsButtonLoc = By.cssSelector("a[href='/my-list/views?tab=0']");
-    private final By removeFromListButtonLoc = By.cssSelector("button['Remove from My List']");
-    private final By applyNow = By.cssSelector("a[role='button'][aria-label='Apply now']");
-    private final By removeProgramButtonLoc = By.cssSelector("[aria-label='Click to remove']");
-    private final By listViewButtonLoc = By.cssSelector("[class^='MyList_side-panel'] button[name='List View']");
-    private final By ComparisonButtonLoc = By.cssSelector("[class^='MyList_side-panel'] button[name='Comparison View']");
-    private final By listViewRemoveButton = By.cssSelector("[aria-label='Remove from My List']");
-    private final By listViewApplyButton = By.cssSelector("a[role='button'][aria-label='Apply now']");
-    // private final By comparisonViewButtonLoc = By.cssSelector("button[name='Comparison View']");
-    // private final By applyNowButton = By.cssSelector("a[role='button'][aria-label='Apply now']");
+    private final By programBy = By.cssSelector("p[class^='MyList_program-name']");
+    private final By exploreProgramsBtnBy = By.cssSelector("a[href='/my-list/views?tab=0']");
+    private final By comparisonBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='Comparison View']");
+    private final By comparisonRemoveBtnBy = By.cssSelector("[aria-label='Click to remove']");
+
+    private final By listBtnBy = By.cssSelector("[class^='MyList_side-panel'] button[name='List View']");
+    private final By listRemoveBtnBy = By.cssSelector("[aria-label='Remove from My List']");
+    
+    private final By applyNowBtnBy = By.cssSelector("a[role='button'][aria-label='Apply now']");
 
     public MyListPage(WebDriver driver) {
         super(driver);
@@ -31,48 +29,48 @@ public class MyListPage extends BasePage {
     }
 
     public void clickExplorePrograms() {
-        scrollToAndClick(exploreProgramsButtonLoc);
+        scrollToAndClick(exploreProgramsBtnBy);
     }
 
     public String getProgramName() {
-        WebElement programNameEl = waitAndGet(programNameLoc);
+        WebElement programNameEl = waitAndGet(programBy);
         return programNameEl.getText();
     }
 
     public void clickToRemoveProgram() {
         int oldSize = getSavedPrograms().size();
-        waitAndClick(removeProgramButtonLoc);
-        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(programNameLoc, oldSize));
+        waitAndClick(comparisonRemoveBtnBy);
+        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(programBy, oldSize));
     }
 
     public List<WebElement> getSavedPrograms() {
-        return driver.findElements(programNameLoc);
+        return driver.findElements(programBy);
     }
 
     public void clickListViewButton() {
-        scrollToAndClick(listViewButtonLoc);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(listViewRemoveButton));
+        scrollToAndClick(listBtnBy);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(listRemoveBtnBy));
     }
 
     public void clickListViewRemoveProgram() {
-        waitAndClick(listViewRemoveButton);
+        waitAndClick(listRemoveBtnBy);
     }
 
     public void clickRemoveFromListButton() {
-        waitAndClick(removeFromListButtonLoc);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(listViewApplyButton));
+        waitAndClick(comparisonRemoveBtnBy);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(applyNowBtnBy));
     }
 
     public List<WebElement> getApplyNowButtons() {
-        return driver.findElements(applyNow);
+        return driver.findElements(applyNowBtnBy);
     }
 
-    public WebElement getListViewApplyButton() {
-        return waitAndGet(listViewApplyButton);
-    }
+    public WebElement getApplyButton() {
+        scrollToAndClick(comparisonBtnBy);
+        return waitAndGet(applyNowBtnBy);
 
+    }
     public void clickComparisonView() {
-        scrollToAndClick(ComparisonButtonLoc);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(programNameLoc));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(programBy));
     }
 }

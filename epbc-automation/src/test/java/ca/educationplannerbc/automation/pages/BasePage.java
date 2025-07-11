@@ -22,14 +22,28 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    protected WebElement waitAndGet(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     protected void waitAndClick(By locator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
         element.click();
     }
 
+    protected void waitAndClick(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
     protected void scrollToAndClick(By locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        WebElement element = waitAndGet(locator);
         new Actions(driver).moveToElement(element).perform();
         waitAndClick(locator);
+    }
+
+    protected void scrollToAndClick(WebElement element) {
+        waitAndGet(element);
+        new Actions(driver).moveToElement(element).perform();
+        waitAndClick(element);
     }
 }

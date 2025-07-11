@@ -8,9 +8,9 @@ import org.openqa.selenium.WebElement;
 import ca.educationplannerbc.automation.config.TestConfig;
 
 public class HomePage extends BasePage{
-    private final By signInButtonLoc = By.cssSelector("a[href='#']");
-    private final By searchBarLoc = By.cssSelector("input[name='search']");
-    private final By myListButtonLoc = By.cssSelector("a[href='/my-list']");
+    private final By signInBtnBy = By.cssSelector("[class^='header'] a[href='#']");
+    private final By searchInputBy = By.cssSelector("input[name='search']");
+    private final By myListBtnBy = By.cssSelector("[class^='header'] a[href='/my-list']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -21,21 +21,21 @@ public class HomePage extends BasePage{
     }
 
     public void clickMyListButton() {
-        waitAndClick(myListButtonLoc);
+        waitAndClick(myListBtnBy);
     }
 
     public void clickSignIn() {
-        waitAndClick(signInButtonLoc);
+        waitAndClick(signInBtnBy);
     }
 
     public WebElement getSearchBar() {
-        return waitAndGet(searchBarLoc);
+        return waitAndGet(searchInputBy);
     }
 
     public void searchAndSubmit(String searchTerm) {
-        WebElement searchBarEl = waitAndGet(searchBarLoc);
-        searchBarEl.clear();
-        searchBarEl.sendKeys(searchTerm);
-        searchBarEl.sendKeys(Keys.RETURN);
+        WebElement searchInputEl = waitAndGet(searchInputBy);
+        searchInputEl.clear();
+        searchInputEl.sendKeys(searchTerm);
+        searchInputEl.sendKeys(Keys.RETURN);
     }
 }

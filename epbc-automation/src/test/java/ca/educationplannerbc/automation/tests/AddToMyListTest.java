@@ -43,7 +43,7 @@ public class AddToMyListTest {
         searchPage = new SearchPage(driver);
         // Search results are filtered
         int resultsBefore = searchPage.getTotalResults();
-        searchPage.filterByAreaOfStudy();
+        searchPage.filterResults("Areas of study", "Technology (IT)");
         int resultsAfter = searchPage.getTotalResults();
         assertTrue(resultsAfter < resultsBefore);
 

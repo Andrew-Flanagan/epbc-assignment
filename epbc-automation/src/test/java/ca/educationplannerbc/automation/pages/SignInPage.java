@@ -7,11 +7,9 @@ import org.openqa.selenium.WebElement;
 import ca.educationplannerbc.automation.config.TestConfig;
 
 public class SignInPage extends BasePage {
-    private final By emailInputLoc = By.id("signin-username");
-    private final By passwordInputLoc = By.id("signin-password");
-    private final By signInButtonLoc = By.id("sign-in-button");
-    private final By loginHeadingLoc = By.cssSelector("h2.login-heading");
-
+    private final By emailBy = By.id("signin-username");
+    private final By passwordBy = By.id("signin-password");
+    private final By signInBy = By.id("sign-in-button");
 
     public SignInPage(WebDriver driver) {
         super(driver);
@@ -21,23 +19,19 @@ public class SignInPage extends BasePage {
         driver.get(TestConfig.BASE_URL + "signin");
     }
 
-    public WebElement getLoginHeader() {
-        return waitAndGet(loginHeadingLoc);
-    }
-
     public By getEmailLocator() {
-        return emailInputLoc;
+        return emailBy;
     }
 
     public void signIn(String email, String password) {
-        WebElement emailInputEl = waitAndGet(emailInputLoc);
-        emailInputEl.clear();
-        emailInputEl.sendKeys(email);
+        WebElement emailEl = waitAndGet(emailBy);
+        emailEl.clear();
+        emailEl.sendKeys(email);
 
-        WebElement passwordInputEl = waitAndGet(passwordInputLoc);
-        passwordInputEl.clear();
-        passwordInputEl.sendKeys(password);
+        WebElement passwordEl = waitAndGet(passwordBy);
+        passwordEl.clear();
+        passwordEl.sendKeys(password);
 
-        waitAndClick(signInButtonLoc);
+        waitAndClick(signInBy);
     }
 }

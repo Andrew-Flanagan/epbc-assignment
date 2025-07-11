@@ -10,22 +10,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ca.educationplannerbc.automation.config.TestConfig;
 
 public class SearchPage extends BasePage {
-    private final By areaOfStudyLoc = By.id("react-select-dropdown-select-5-placeholder");
-    private final By addToMyListLoc = By.cssSelector("button[aria-label$='My List']");
-    private final By filterLoc = By.xpath("//*[@id=\"dropdown-option-search-filter-studyArea-Technology-(IT)\"]/li/label");
-    private final By searchResultLoc = By.cssSelector("[class^='Search_result-row']");
-    private final By searchButtonLoc = By.cssSelector("button[aria-label='Search']");
-    private final By programNameLoc = By.cssSelector("[id^='result-name-']");
-    private final By tabProgramsLoc = By.cssSelector("[id^='tab-Programs']");
-
-    // @FindBy(id="dropdown-option-search-filter-studyArea-Technology-(IT)") WebElement filterOption;
-    // @FindBy(css="div[class='dropdown-select__option']") WebElement filterOption;
-    // private final By filter = By.id("dropdown-option-search-filter-studyArea-Technology-(IT)");
-
-    // aria-expanded="true"
-    // dropdown-select__menu
-    // class = dropdown-select__option
-    // <label> Technology (IT) </label>
+    private final By searchBtnBy = By.cssSelector("button[aria-label='Search']");
+    private final By filterContainerBy = By.cssSelector("[class^='Search_search-filters-container']");
+    private final By filterDropdownBy = By.cssSelector("[class^='dropdown-select__menu']");
+    private final By tabProgramsBy = By.cssSelector("[id^='tab-Programs']");
+    private final By searchResultBy = By.cssSelector("[class^='Search_result-row']");
+    private final By programNameBy = By.cssSelector("[id^='result-name-']");
+    private final By addToListBy = By.cssSelector("button[aria-label$='My List']");
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -36,47 +27,57 @@ public class SearchPage extends BasePage {
     }
 
     public String getTabProgramsText() {
-        return waitAndGet(tabProgramsLoc).getText();
+        return waitAndGet(tabProgramsBy).getText();
     }
 
-    public void filterByAreaOfStudy() {
+    public void filterResults(String filterOption, String filterValue) {
         String oldText = getTabProgramsText();
-        waitAndClick(areaOfStudyLoc);
-        scrollToAndClick(filterLoc);
+
+        // sub filter from parent container to match the filter text, more resilient than using current id
+        WebElement filterContainerEl = driver.findElement(filterContainerBy);
+        WebElement filterOptionEl = filterContainerEl
+            .findElement(By.xpath(".//div[contains(text(), '" + filterOption + "')]"));
+        waitAndClick(filterOptionEl);
+
+        WebElement filterDropdownEl = driver.findElement(filterDropdownBy);
+        WebElement filterValueEl = filterDropdownEl
+            .findElement(By.xpath(".//label[contains(text(), '" + filterValue + "')]"));
+        scrollToAndClick(filterValueEl);
+
         // due to current bug(?), have to press search button after applying filter
-        waitAndClick(searchButtonLoc);
-        // waits until the program counter text has changed after filter is applied
-        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(tabProgramsLoc, oldText)));
+        waitAndClick(searchBtnBy);
+        // waits until the program counter (num results) text has changed after filter is applied
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(tabProgramsBy, oldText)));
     }
 
     public int getTotalResults() {
-        String programTotal = waitAndGet(tabProgramsLoc).getText();
+        String programTotal = waitAndGet(tabProgramsBy).getText();
         programTotal = programTotal.replaceAll("\\D", "");
         return Integer.parseInt(programTotal);
     }
 
     public WebElement getAddToListButton() {
-        return waitAndGet(addToMyListLoc);
+        return waitAndGet(addToListBy);
     }
 
     // don't really like how this is being done
     public String addFirstResultToMyList() {
-        waitAndGet(searchResultLoc);
+        waitAndGet(searchResultBy);
 
-        List<WebElement> newSearchRow = driver.findElements(searchResultLoc);
+        List<WebElement> newSearchRow = driver.findElements(searchResultBy);
         WebElement firstResult = wait.until(ExpectedConditions.visibilityOf(newSearchRow.get(0)));
-        String programNameText = firstResult.findElement(programNameLoc).getText();
+        String programNameText = firstResult.findElement(programNameBy).getText();
 
-        String addToListText = firstResult.findElement(addToMyListLoc).getText();
-        scrollToAndClick(addToMyListLoc);
-        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(addToMyListLoc, addToListText)));
+        String addToListText = firstResult.findElement(addToListBy).getText();
+        scrollToAndClick(addToListBy);
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(addToListBy, addToListText)));
         return programNameText;
     }
 
     public String getProgramName() {
-        List<WebElement> programResults = driver.findElements(searchResultLoc);
+        List<WebElement> programResults = driver.findElements(searchResultBy);
         WebElement firstResult = programResults.get(0);
-        WebElement program = firstResult.findElement(programNameLoc);
+        WebElement program = firstResult.findElement(programNameBy);
         return program.getText();
     }
 }
