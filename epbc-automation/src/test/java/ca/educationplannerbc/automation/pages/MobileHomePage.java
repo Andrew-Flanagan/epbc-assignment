@@ -31,7 +31,6 @@ public class MobileHomePage extends BasePage{
     public void clickSignIn() {
         waitAndClick(mobileMenuBtnBy);
         waitAndClick(mobileSignInBtnBy);
-
     }
 
     public WebElement getSearchBar() {

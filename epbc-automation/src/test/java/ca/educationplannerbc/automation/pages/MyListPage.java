@@ -26,9 +26,12 @@ public class MyListPage extends BasePage {
     // mobile locators
     private final By mobileListViewBy = By.cssSelector("button[name='List View']");
 
+    private final boolean isMobile;
 
-    public MyListPage(WebDriver driver) {
+
+    public MyListPage(WebDriver driver, boolean isMobile) {
         super(driver);
+        this.isMobile = isMobile;
     }
 
     // Comparison view methods
@@ -85,7 +88,12 @@ public class MyListPage extends BasePage {
     }
 
     public void clickListView() {
-        scrollToAndClick(listBtnBy);
+        if (this.isMobile) {
+            mobileClickListView();
+        }
+        else{
+            scrollToAndClick(listBtnBy);
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(listRemoveBtnBy));
     }
 

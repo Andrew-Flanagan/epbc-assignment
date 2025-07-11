@@ -23,10 +23,13 @@ public class SearchPage extends BasePage {
     private final By mobileFiltersParentBy = By.cssSelector("div[class^='Search_filter-list']");
     private final By mobileSearchBtnBy = By.id("SearchButton");
 
+    private final boolean isMobile;
 
 
-    public SearchPage(WebDriver driver) {
+
+    public SearchPage(WebDriver driver, boolean isMobile) {
         super(driver);
+        this.isMobile = isMobile;
     }
 
     public void open() {
@@ -40,11 +43,18 @@ public class SearchPage extends BasePage {
     public void filterResults(String filterOption, String filterValue) {
         String oldText = getTabProgramsText();
 
-        // sub filter from parent container to match the filter text, more resilient than using current id
-        WebElement filterContainerEl = waitAndGet(filterContainerBy);
+        WebElement parent;
+        if (this.isMobile) {
+            clickMobileFilters();
+            parent = waitAndGet(mobileFiltersParentBy);
+        }
+        else {
+            parent = waitAndGet(filterContainerBy);
+        }
+        
         WebElement filterOptionEl = 
             getChildByXPath(
-                filterContainerEl,
+                parent,
                 ".//div[contains(text(), '" + filterOption + "')]",
                 "filter");
         waitAndClick(filterOptionEl);
@@ -56,9 +66,14 @@ public class SearchPage extends BasePage {
                  ".//label[contains(text(), '" + filterValue + "')]",
                   "dropdown value");
         scrollToAndClick(filterValueEl);
+        if (this.isMobile) {
+            scrollToAndClick(waitAndGet(parent));
+            scrollToAndClick(mobileSearchBtnBy);
+        }
+        else {
+            waitAndClick(searchBtnBy);
+        }
 
-        waitAndClick(searchBtnBy);
-        // waits until the program counter (num results) text has changed after filter is applied
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(tabProgramsBy, oldText)));
     }
 
@@ -91,6 +106,7 @@ public class SearchPage extends BasePage {
         return programList;
     }
 
+    // mobile methods
     public void clickMobileFilters() {
         scrollToAndClick(mobileFiltersBtnby);
     }
@@ -98,7 +114,6 @@ public class SearchPage extends BasePage {
     public void mobileFilterResults(String filterOption, String filterValue) {
         String oldText = getTabProgramsText();
 
-        // sub filter from parent container to match the filter text, more resilient than using current id
         WebElement filterContainerEl = waitAndGet(mobileFiltersParentBy);
         WebElement filterOptionEl = 
             getChildByXPath(
@@ -117,7 +132,6 @@ public class SearchPage extends BasePage {
         scrollToAndClick(waitAndGet(filterContainerEl));
 
         scrollToAndClick(mobileSearchBtnBy);
-        // waits until the program counter (num results) text has changed after filter is applied
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(tabProgramsBy, oldText)));
     }
 }

@@ -16,10 +16,13 @@ public class HomePage extends BasePage{
     private final By mobileSignInBtnBy = By.cssSelector("nav[aria-label='Main menu'] a[href='#']");
     private final By mobileMyListBtnBy = By.cssSelector("nav[aria-label='Main menu'] a[href='/my-list']");
 
+    private final boolean isMobile;
 
 
-    public HomePage(WebDriver driver) {
+
+    public HomePage(WebDriver driver, boolean isMobile) {
         super(driver);
+        this.isMobile = isMobile;
     }
 
     public void open() {
@@ -27,11 +30,22 @@ public class HomePage extends BasePage{
     }
 
     public void clickMyListButton() {
-        waitAndClick(myListBtnBy);
+        if (this.isMobile) {
+            mobileClickNav();
+            mobileClickMyList();
+        }
+        else{
+            waitAndClick(myListBtnBy);
+        }
     }
 
     public void clickSignIn() {
-        waitAndClick(signInBtnBy);
+        if (this.isMobile) {
+            mobileClickSignIn();
+        }
+        else{
+            waitAndClick(signInBtnBy);
+        }
     }
 
     public WebElement getSearchBar() {
