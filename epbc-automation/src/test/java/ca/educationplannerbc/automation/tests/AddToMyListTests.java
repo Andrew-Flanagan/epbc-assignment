@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.Dimension;
@@ -20,7 +21,7 @@ import ca.educationplannerbc.automation.pages.MyListPage;
 import ca.educationplannerbc.automation.pages.SearchPage;
 import ca.educationplannerbc.automation.pages.SignInPage;
 
-public class AddToMyListTest {
+public class AddToMyListTests {
     private WebDriver driver;
     private HomePage homePage;
     private SignInPage signInPage;
@@ -38,8 +39,9 @@ public class AddToMyListTest {
     }
 
     @ParameterizedTest
-    @ValueSource(booleans = { true, false }) 
-    public void testAddToMyListFlow(boolean isMobile) {
+    @ValueSource(booleans = { true, false })
+    @DisplayName("New user can successfully add programs from search to My List on mobile and desktop")
+    public void addProgramsToMyList(boolean isMobile) {
         if (isMobile) { driver.manage().window().setSize(new Dimension(390, 844)); } // iPhone 12 pro dimensions
         homePage = new HomePage(driver, isMobile);
         homePage.open();

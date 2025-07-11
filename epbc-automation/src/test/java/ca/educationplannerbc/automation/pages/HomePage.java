@@ -18,8 +18,6 @@ public class HomePage extends BasePage{
 
     private final boolean isMobile;
 
-
-
     public HomePage(WebDriver driver, boolean isMobile) {
         super(driver);
         this.isMobile = isMobile;
