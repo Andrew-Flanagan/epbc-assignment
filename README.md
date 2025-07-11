@@ -79,6 +79,28 @@ All testing done on Brave browser.
 
 ![alt text](<images/Screenshot 2025-07-09 at 4.17.15 PM.png>)
 
+## Test Cases for future testing
+
+I consider these tests outside the scope of this assessment, but at a high level, here are some other tests cases to consider for this feature:
+
+- Adding to list while not signed in
+- Removal of program from my list from th esearch page
+- Removal of program from comparison view
+- Clicking apply now button opens appropriate page
+- Clicking card in program list goes to institution page/program page
+- Saved programs persist after logging out
+- Mobile testing with different user agents
+
+## Limitations / Reflections
+
+- This username/password must not be used for other tests that add programs to the list or it will fail
+    - I would address this my seeding data or using api before test to create a fresh user account
+- Adding too many programs might fail validation in the my list page due to because of horizontally scrolling
+- I had to use some brittle selectors relying on text content due to lack of id selectors
+    - Tried to follow Selenium's recommended practice of using id  > cssSelector and only used XPath when I thought it would be more reliable (the filters have an id but seems they are assigned by an index, if order of filters is changed it would break the test if using the id as a locator)
+- Use network response to validate login - out of scope, this should be done in a login suite.
+    - Login validation should be done in a separate test.
+- Possibly should break up list view and comparison view in My list into two separate pages and inherit from a generic my list page.
 
 
 
