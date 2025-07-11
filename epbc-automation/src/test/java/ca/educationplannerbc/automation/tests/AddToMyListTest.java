@@ -30,7 +30,6 @@ public class AddToMyListTest {
     @BeforeEach
     public void setup() {
         driver = new ChromeDriver();
-        
     }
 
     @AfterEach

@@ -101,7 +101,7 @@ I consider these tests outside the scope of this assessment, but at a high level
 - Use network response to validate login - out of scope, this should be done in a login suite.
     - Login validation should be done in a separate test.
 - Possibly should break up list view and comparison view in My list into two separate pages and inherit from a generic my list page.
-
+- I wanted to attempt integrating test runs on CI but didn't have time.
 
 
         
