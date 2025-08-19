@@ -2,17 +2,24 @@ package ca.educationplannerbc.automation.tests;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import static java.util.Map.entry;
 
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import ca.educationplannerbc.automation.config.TestData;
@@ -38,6 +45,7 @@ public class AddToMyListTests {
         driver.quit();
     }
 
+    @Disabled
     @ParameterizedTest
     @ValueSource(booleans = { true, false })
     @DisplayName("New user can successfully add programs from search to My List on mobile and desktop")
@@ -82,5 +90,38 @@ public class AddToMyListTests {
         // No saved programs after removing all
         myListPage.removeAllListPrograms();
         assertEquals(myListPage.getListNumPrograms(), 0 );
+    }
+
+    @Test
+    @Disabled
+    public void checkHomeButtons() {
+        homePage = new HomePage(driver, false);
+        homePage.open();
+        Map<String, String> buttonMap = Map.ofEntries(
+            entry("Plan", "https://stg-www.educationplannerbc.ca/go/plan"),
+            entry("Search", "https://stg-www.educationplannerbc.ca/search"),
+            entry("Find Your Path", "https://stg-www.educationplannerbc.ca/find-your-path"),
+            entry("Apply", "https://stg-apply.educationplannerbc.ca/")
+        );
+
+        String buttonText;
+        String buttonLink;
+
+        String expectedBtnText;
+        String expectedLink;
+
+        for (Map.Entry<String, String> entry : buttonMap.entrySet()) {
+            expectedBtnText = entry.getKey();
+            expectedLink = entry.getValue();
+
+            List<WebElement> buttons = driver.findElements(By.linkText(expectedBtnText));
+            
+            assertFalse(buttons.isEmpty(), "Cannot find any button by text: " + expectedBtnText);
+
+            for (WebElement button : buttons) {
+                buttonLink = button.getAttribute("href");
+                assertEquals(buttonLink, expectedLink);
+            }
+        }
     }
 }

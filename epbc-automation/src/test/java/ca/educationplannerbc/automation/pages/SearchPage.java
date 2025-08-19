@@ -12,12 +12,12 @@ import ca.educationplannerbc.automation.config.TestData;
 
 public class SearchPage extends BasePage {
     private final By searchBtnBy = By.cssSelector("button[aria-label='Search']");
-    private final By filterContainerBy = By.cssSelector("[class^='Search_search-filters-container']");
+    private final By filterContainerBy = By.cssSelector("[class*='Search_search-filters-container']");
     private final By filterDropdownBy = By.cssSelector("[class^='dropdown-select__menu']");
     private final By tabProgramsBy = By.cssSelector("[id^='tab-Programs']");
-    private final By searchResultBy = By.cssSelector("[class^='Search_result-row']");
+    private final By searchResultBy = By.cssSelector("[class^='pb-3']");
     private final By programNameBy = By.cssSelector("[id^='result-name-']");
-    private final By addToListBy = By.cssSelector("div[class^='Search_result-row'] button[data-status]");
+    private final By addToListBy = By.cssSelector("div[class^='pb-3'] button[data-status]");
 
     private final By mobileFiltersBtnby = By.cssSelector("button[aria-label='Filters']");
     private final By mobileFiltersParentBy = By.cssSelector("div[class^='Search_filter-list']");

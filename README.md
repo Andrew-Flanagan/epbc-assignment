@@ -1,6 +1,6 @@
 # epbc-assignment
 
-Takehome technical assignment for EPBC.
+Takehome technical assignment for EPBC. I wrote one parameterized test that tests the requested flow for both a desktop and mobile view.
 
 ## Requirements
 
@@ -9,6 +9,8 @@ Java version 21.0.1+
 Apache Maven 3.9.10+
 
 Selenium 4.34.0+
+
+Google Chrome browser
 
 ## Instructions
 
@@ -102,7 +104,4 @@ I consider these tests outside the scope of this assessment, but at a high level
 - Use network response to validate login - out of scope, this should be done in a login suite.
     - Login validation should be done in a separate test.
 - Might be better to break up list view and comparison view in My list into two separate pages and inherit from a generic my list page.
-- I wanted to attempt integrating test runs on CI but didn't have time.
-
-
-        
+- I wanted to attempt integrating test runs on CI but didn't have time.        
