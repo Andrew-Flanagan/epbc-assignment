@@ -1,4 +1,4 @@
-# epbc-assignment
+# EducationPlannerBC Assignment
 
 Takehome technical assignment for EPBC. I wrote one parameterized test that tests the requested flow for both a desktop and mobile view.
 
