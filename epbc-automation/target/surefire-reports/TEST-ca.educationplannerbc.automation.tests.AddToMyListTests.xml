@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="ca.educationplannerbc.automation.tests.AddToMyListTests" time="3.343" tests="2" errors="0" skipped="1" failures="0">
+=======
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="ca.educationplannerbc.automation.tests.AddToMyListTests" time="23.973" tests="2" errors="2" skipped="0" failures="0">
+>>>>>>> ef47cf8 (update some locators)
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +17,11 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CA"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
+<<<<<<< HEAD
     <property name="sun.java.command" value="/Users/andrewflanagan/Documents/hobbies/epbc_assignment/epbc-automation/target/surefire/surefirebooter-20250813141544296_3.jar /Users/andrewflanagan/Documents/hobbies/epbc_assignment/epbc-automation/target/surefire 2025-08-13T14-15-44_226-jvmRun1 surefire-20250813141544296_1tmp surefire_0-20250813141544296_2tmp"/>
+=======
+    <property name="sun.java.command" value="/Users/andrewflanagan/Documents/hobbies/coding/job_interview/epbc_assignment/epbc-automation/target/surefire/surefirebooter-20250720161409416_3.jar /Users/andrewflanagan/Documents/hobbies/coding/job_interview/epbc_assignment/epbc-automation/target/surefire 2025-07-20T16-14-09_178-jvmRun1 surefire-20250720161409416_1tmp surefire_0-20250720161409416_2tmp"/>
+>>>>>>> ef47cf8 (update some locators)
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/andrewflanagan/Documents/hobbies/epbc_assignment/epbc-automation/target/test-classes:/Users/andrewflanagan/Documents/hobbies/epbc_assignment/epbc-automation/target/classes:/Users/andrewflanagan/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.0/junit-jupiter-api-5.11.0.jar:/Users/andrewflanagan/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/andrewflanagan/.m2/repository/org/junit/platform/junit-platform-commons/1.11.0/junit-platform-commons-1.11.0.jar:/Users/andrewflanagan/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/andrewflanagan/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.0/junit-jupiter-params-5.11.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-java/4.34.0/selenium-java-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-api/4.34.0/selenium-api-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-chrome-driver/4.34.0/selenium-chrome-driver-4.34.0.jar:/Users/andrewflanagan/.m2/repository/com/google/auto/service/auto-service-annotations/1.1.1/auto-service-annotations-1.1.1.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-chromium-driver/4.34.0/selenium-chromium-driver-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-json/4.34.0/selenium-json-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-manager/4.34.0/selenium-manager-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v136/4.34.0/selenium-devtools-v136-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v137/4.34.0/selenium-devtools-v137-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-devtools-v138/4.34.0/selenium-devtools-v138-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-edge-driver/4.34.0/selenium-edge-driver-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-firefox-driver/4.34.0/selenium-firefox-driver-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-http/4.34.0/selenium-http-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-ie-driver/4.34.0/selenium-ie-driver-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-remote-driver/4.34.0/selenium-remote-driver-4.34.0.jar:/Users/andrewflanagan/.m2/repository/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar:/Users/andrewflanagan/.m2/repository/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/Users/andrewflanagan/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/Users/andrewflanagan/.m2/repository/com/google/errorprone/error_prone_annotations/2.36.0/error_prone_annotations-2.36.0.jar:/Users/andrewflanagan/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-api/1.51.0/opentelemetry-api-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-context/1.51.0/opentelemetry-context-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-exporter-logging/1.51.0/opentelemetry-exporter-logging-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-sdk-common/1.51.0/opentelemetry-sdk-common-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure-spi/1.51.0/opentelemetry-sdk-extension-autoconfigure-spi-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure/1.51.0/opentelemetry-sdk-extension-autoconfigure-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-sdk-trace/1.51.0/opentelemetry-sdk-trace-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-sdk/1.51.0/opentelemetry-sdk-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-sdk-metrics/1.51.0/opentelemetry-sdk-metrics-1.51.0.jar:/Users/andrewflanagan/.m2/repository/io/opentelemetry/opentelemetry-sdk-logs/1.51.0/opentelemetry-sdk-logs-1.51.0.jar:/Users/andrewflanagan/.m2/repository/net/bytebuddy/byte-buddy/1.17.6/byte-buddy-1.17.6.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-os/4.34.0/selenium-os-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/apache/commons/commons-exec/1.5.0/commons-exec-1.5.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-safari-driver/4.34.0/selenium-safari-driver-4.34.0.jar:/Users/andrewflanagan/.m2/repository/org/seleniumhq/selenium/selenium-support/4.34.0/selenium-support-4.34.0.jar:"/>
@@ -30,7 +38,11 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
+<<<<<<< HEAD
     <property name="surefire.real.class.path" value="/Users/andrewflanagan/Documents/hobbies/epbc_assignment/epbc-automation/target/surefire/surefirebooter-20250813141544296_3.jar"/>
+=======
+    <property name="surefire.real.class.path" value="/Users/andrewflanagan/Documents/hobbies/coding/job_interview/epbc_assignment/epbc-automation/target/surefire/surefirebooter-20250720161409416_3.jar"/>
+>>>>>>> ef47cf8 (update some locators)
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="24.0.1"/>
@@ -59,8 +71,125 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
+<<<<<<< HEAD
   <testcase name="addProgramsToMyList(boolean)" classname="ca.educationplannerbc.automation.tests.AddToMyListTests" time="0.0">
     <skipped message="public void ca.educationplannerbc.automation.tests.AddToMyListTests.addProgramsToMyList(boolean) is @Disabled"/>
   </testcase>
   <testcase name="checkHomeButtons" classname="ca.educationplannerbc.automation.tests.AddToMyListTests" time="3.321"/>
+=======
+  <testcase name="addProgramsToMyList(boolean)[1]" classname="ca.educationplannerbc.automation.tests.AddToMyListTests" time="15.428">
+    <error message="Element should have been &quot;select&quot; but was &quot;div&quot;&#10;Build info: version: &apos;4.34.0&apos;, revision: &apos;707dcb4246*&apos;&#10;System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;aarch64&apos;, os.version: &apos;15.5&apos;, java.version: &apos;24.0.1&apos;&#10;Driver info: driver.version: unknown" type="org.openqa.selenium.support.ui.UnexpectedTagNameException"><![CDATA[org.openqa.selenium.support.ui.UnexpectedTagNameException: 
+Element should have been "select" but was "div"
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '15.5', java.version: '24.0.1'
+Driver info: driver.version: unknown
+	at org.openqa.selenium.support.ui.Select.<init>(Select.java:44)
+	at ca.educationplannerbc.automation.pages.SearchPage.filterResults(SearchPage.java:62)
+	at ca.educationplannerbc.automation.tests.AddToMyListTests.addProgramsToMyList(AddToMyListTests.java:56)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:294)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:294)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:294)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+]]></error>
+  </testcase>
+  <testcase name="addProgramsToMyList(boolean)[2]" classname="ca.educationplannerbc.automation.tests.AddToMyListTests" time="8.493">
+    <error message="Element should have been &quot;select&quot; but was &quot;div&quot;&#10;Build info: version: &apos;4.34.0&apos;, revision: &apos;707dcb4246*&apos;&#10;System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;aarch64&apos;, os.version: &apos;15.5&apos;, java.version: &apos;24.0.1&apos;&#10;Driver info: driver.version: unknown" type="org.openqa.selenium.support.ui.UnexpectedTagNameException"><![CDATA[org.openqa.selenium.support.ui.UnexpectedTagNameException: 
+Element should have been "select" but was "div"
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '15.5', java.version: '24.0.1'
+Driver info: driver.version: unknown
+	at org.openqa.selenium.support.ui.Select.<init>(Select.java:44)
+	at ca.educationplannerbc.automation.pages.SearchPage.filterResults(SearchPage.java:62)
+	at ca.educationplannerbc.automation.tests.AddToMyListTests.addProgramsToMyList(AddToMyListTests.java:56)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:294)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:294)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:294)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+]]></error>
+  </testcase>
+>>>>>>> ef47cf8 (update some locators)
 </testsuite>

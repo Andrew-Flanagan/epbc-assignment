@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 ca/educationplannerbc/automation/pages/BasePage.class
 ca/educationplannerbc/automation/pages/HomePage.class
 ca/educationplannerbc/automation/pages/SignInPage.class
 ca/educationplannerbc/automation/tests/AddToMyListTests.class
 ca/educationplannerbc/automation/pages/SearchPage.class
+=======
+ca/educationplannerbc/automation/pages/SignInPage.class
+ca/educationplannerbc/automation/tests/AddToMyListTests.class
+ca/educationplannerbc/automation/pages/SearchPage.class
+ca/educationplannerbc/automation/pages/BasePage.class
+ca/educationplannerbc/automation/pages/HomePage.class
+>>>>>>> ef47cf8 (update some locators)
 ca/educationplannerbc/automation/pages/MyListPage.class

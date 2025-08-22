@@ -13,7 +13,11 @@ import ca.educationplannerbc.automation.config.TestData;
 public class MyListPage extends BasePage {
     // comparison view locators
     private final By programBy = By.cssSelector("p[class^='MyList_program-name']");
+<<<<<<< HEAD
     private final By exploreProgramsBtnBy = By.cssSelector("a[href*='tab=My+programs']");
+=======
+    private final By exploreProgramsBtnBy = By.cssSelector("a[role='button'][aria-label='Explore my programs']");
+>>>>>>> ef47cf8 (update some locators)
     private final By comparisonRemoveBtnBy = By.cssSelector("[aria-label='Click to remove']");
     
     // list view locators
